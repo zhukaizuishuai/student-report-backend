@@ -1,1 +1,14 @@
+# 本地环境配置（含真实数据库密码等敏感信息，禁止提交）
 application-dev.properties
+
+# 构建产物
+target/
+*.class
+
+# IDE
+.idea/
+.vscode/
+
+# 日志
+*.log
+logs/

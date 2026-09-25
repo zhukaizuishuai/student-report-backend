@@ -30,17 +30,22 @@ src/
 ## 启动前准备
 
 ### 1. 数据库配置
-项目使用 MySQL 数据库，默认配置如下：
+项目使用 MySQL 数据库，连接信息通过环境变量注入（代码中不存放真实密码），本地开发默认值如下：
 ```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/student_report?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&createDatabaseIfNotExist=true
-spring.datasource.username=root
-spring.datasource.password=123456
+spring.datasource.url=jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:student_report}?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&createDatabaseIfNotExist=true
+spring.datasource.username=${DB_USERNAME:root}
+spring.datasource.password=${DB_PASSWORD:123456}
 ```
 
-**注意：** 请根据实际情况修改数据库连接配置，包括：
-- 数据库地址和端口
-- 数据库用户名和密码
-- 数据库名称（如果不存在，系统会自动创建）
+**注意：**
+- 本地开发可直接使用默认值（localhost + 本机 MySQL）
+- 部署到服务器时，通过环境变量覆盖真实配置，例如：
+  ```bash
+  export DB_HOST=数据库地址 DB_PORT=3306 DB_NAME=student_report
+  export DB_USERNAME=数据库账号 DB_PASSWORD=数据库密码
+  ```
+- 也可以把真实配置写在 `application-dev.properties` 中（已在 .gitignore 中排除，不会被提交）
+- 请勿将真实服务器 IP、数据库密码提交到仓库
 
 ### 2. 确保已安装 Java
 项目需要 Java 8 环境，请确保已安装并配置好 JAVA_HOME。
