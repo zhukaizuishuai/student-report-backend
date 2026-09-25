@@ -1,0 +1,14 @@
+com\example\studentreport\entity\StudentReport.class
+com\example\studentreport\dto\TodoItemDTO.class
+com\example\studentreport\config\GlobalExceptionHandler.class
+com\example\studentreport\service\TodoItemService.class
+com\example\studentreport\repository\TodoItemRepository.class
+com\example\studentreport\entity\TodoItem.class
+com\example\studentreport\repository\StudentReportRepository.class
+com\example\studentreport\dto\StudentReportDTO.class
+com\example\studentreport\service\StudentReportService.class
+com\example\studentreport\controller\TodoItemController.class
+com\example\studentreport\StudentReportBackendApplication.class
+com\example\studentreport\config\WebMvcConfig.class
+com\example\studentreport\config\LoggerConfig.class
+com\example\studentreport\controller\StudentReportController.class
