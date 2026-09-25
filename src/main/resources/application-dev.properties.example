@@ -1,0 +1,11 @@
+# 本地开发环境配置模板
+# 用法：复制本文件为同目录下的 application-dev.properties，填入你的真实值
+#   cp src/main/resources/application-dev.properties.example src/main/resources/application-dev.properties
+# 注意：application-dev.properties 已被 .gitignore 排除，真实密码永远不会提交到 git
+# 这里的 key 会作为属性参与 application.properties 中 ${DB_XXX:默认值} 占位符的解析
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_NAME=student_report
+DB_USERNAME=root
+DB_PASSWORD=填写你的本机MySQL密码
+# CORS_ALLOWED_ORIGIN=http://localhost:8081

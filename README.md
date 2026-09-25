@@ -37,15 +37,21 @@ spring.datasource.username=${DB_USERNAME:root}
 spring.datasource.password=${DB_PASSWORD:123456}
 ```
 
-**注意：**
-- 本地开发可直接使用默认值（localhost + 本机 MySQL）
-- 部署到服务器时，通过环境变量覆盖真实配置，例如：
-  ```bash
-  export DB_HOST=数据库地址 DB_PORT=3306 DB_NAME=student_report
-  export DB_USERNAME=数据库账号 DB_PASSWORD=数据库密码
-  ```
-- 也可以把真实配置写在 `application-dev.properties` 中（已在 .gitignore 中排除，不会被提交）
-- 请勿将真实服务器 IP、数据库密码提交到仓库
+**本地开发（推荐方式）：**
+1. 复制配置模板并填入本机 MySQL 的真实值：
+   ```bash
+   cp src/main/resources/application-dev.properties.example src/main/resources/application-dev.properties
+   ```
+2. 以 dev profile 启动项目（见下方「启动方式」）
+3. `application-dev.properties` 已被 `.gitignore` 排除，真实密码不会提交到 git
+
+**部署到服务器时：** 不使用 dev 配置文件，改为在服务器上设置环境变量：
+```bash
+export DB_HOST=localhost DB_PORT=3306 DB_NAME=student_report
+export DB_USERNAME=数据库账号 DB_PASSWORD=数据库密码
+```
+
+**注意：** 请勿将真实服务器 IP、数据库密码提交到仓库。
 
 ### 2. 确保已安装 Java
 项目需要 Java 8 环境，请确保已安装并配置好 JAVA_HOME。
@@ -64,13 +70,18 @@ mvn clean package
 
 2. 启动项目：
 ```bash
+# 服务器部署：通过环境变量注入配置（见上文「数据库配置」）
 java -jar target/student-report-backend-0.0.1-SNAPSHOT.jar
+
+# 本地开发：加 dev profile，读取 application-dev.properties 中的真实配置
+java -jar target/student-report-backend-0.0.1-SNAPSHOT.jar --spring.profiles.active=dev
 ```
 
 ### 方式二：使用 Maven 命令启动
 
 ```bash
-mvn spring-boot:run
+# 本地开发（读取 application-dev.properties 中的真实配置）
+mvn spring-boot:run -Dspring-boot.run.profiles=dev
 ```
 
 ### 方式三：在 IDE 中启动
